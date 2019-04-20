@@ -10,6 +10,10 @@ public class FileHandle {
     private FSNetwork server;
     private int fileIndexPointer = 0;
 
+    //this is set to true when a client writes to a file
+    //so we can know whether or not to flush the file on close
+    private boolean write = false;
+
     private int index;
 
     private static int cnt = 1;
@@ -44,6 +48,14 @@ public class FileHandle {
 
         //make sure that the connection is closed
         server.closeConnection();
+    }
+
+    public void setWrite(){
+        write = true;
+    }
+
+    public boolean didWrite(){
+        return write;
     }
 
     @Override

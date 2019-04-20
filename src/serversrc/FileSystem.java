@@ -16,17 +16,23 @@ public class FileSystem {
         return readData(getFile(filename),offset,length,data,lastModified);
     }
 
+    //read a file
+    //when length is -1, the whole file is read and returned
     public static synchronized int readData(File file, int offset, int length, byte[] data,Date lastModified) throws IOException {
         //Create file input stream to read bytes from file
         FileInputStream fin = new FileInputStream(file);
         //get last modified time
         lastModified.setTime(getAttribute(file));
 
-        long fileLen = file.length();
-
-        fin.skip(offset);
-        int result = fin.read(data, 0, length);
-
+        int result;
+        if(length == -1){
+            //read whole file
+            long fileLen = file.length();
+            result = fin.read(data, 0, (int) fileLen);
+        } else {
+            fin.skip(offset);
+            result = fin.read(data, 0, length);
+        }
         fin.close();
         return result;
     }

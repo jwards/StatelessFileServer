@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ClientMain {
 
 
-    private final static String localhost = "192.168.1.30";
+    private final static String localhost = "127.0.0.1";
     private final static int portNum = 10010;
 
     public static void main(String[] args) throws UnknownHostException, IOException {
@@ -32,6 +32,7 @@ public class ClientMain {
         String url = localhost+":"+portNum+"/" + fileName;
         FileHandle fh = fs.open(url);
 
+        long time = System.currentTimeMillis();
         System.out.println("Start reading file...");
         while (!fs.isEOF(fh)) {
 
@@ -39,10 +40,8 @@ public class ClientMain {
             res = fs.read(fh, data);
             //show data that was read
             System.out.print(new String(data,"UTF-8"));
-
         }
-        System.out.println("Done reading file...");
-
+        System.out.println("Done reading file in..." + ((System.currentTimeMillis() - time))+"ms" );
 
         System.out.println("Please enter data to write to file or 'q' to stop");
         String contents = scan.nextLine();

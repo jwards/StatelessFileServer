@@ -101,7 +101,14 @@ public class ClientHandler extends Thread {
     //forms reply to send back to client
     private void formReadReply(FSReply reply, FSRequest request) {
         Date lastModified = new Date();
-        byte[] data = new byte[request.getLength()];
+
+        byte[] data;
+        //if length is -1 read whole file
+        if(request.getLength()== -1) {
+            data = new byte[(int) FileSystem.getFile(request.getFname()).length()];
+        } else {
+            data = new byte[request.getLength()];
+        }
         try {
             //perform read operation and form the reply
             int bytesRead = FileSystem.readData(request.getFname(), request.getOffset(), request.getLength(), data, lastModified);
