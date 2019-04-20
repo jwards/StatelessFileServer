@@ -21,14 +21,15 @@ public class ServerThread extends Thread {
 
         //setup socket
         try {
+            System.out.println("Opening server on port: " + PORT);
             socket = new ServerSocket(PORT);
-
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Couldn't open server port. Aborting");
             return;
         }
 
+        System.out.println("Socket opened. Waiting for connections...");
 
         //listen for client connections and spawn new threads to handle them
         while(true){
