@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+//handles the client's file system
 public class ClientFileSystem implements fileSystemAPI{
 
     private FSNetwork network;

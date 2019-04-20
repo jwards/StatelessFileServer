@@ -5,6 +5,7 @@ import com.sun.istack.internal.NotNull;
 import java.io.*;
 import java.util.Date;
 
+//serverside file system
 public class FileSystem {
 
     //all methods are static since there is no state associated with them

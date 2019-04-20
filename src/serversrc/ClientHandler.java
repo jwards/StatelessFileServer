@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Date;
 
+
+//handles a client connection
 public class ClientHandler extends Thread {
 
 
@@ -22,6 +24,7 @@ public class ClientHandler extends Thread {
     }
 
 
+    //thread begin
     @Override
     public void run() {
         super.run();
@@ -95,6 +98,7 @@ public class ClientHandler extends Thread {
         return reply;
     }
 
+    //forms reply to send back to client
     private void formReadReply(FSReply reply, FSRequest request) {
         Date lastModified = new Date();
         byte[] data = new byte[request.getLength()];
@@ -112,6 +116,7 @@ public class ClientHandler extends Thread {
         }
     }
 
+    //forms reply to send back to client
     private void formWriteReply(FSReply reply, FSRequest request) {
         Date lastModified = new Date();
         try {
@@ -126,6 +131,7 @@ public class ClientHandler extends Thread {
         }
     }
 
+    //forms reply to send back to client
     private void formLookupReply(FSReply reply, FSRequest request) {
         Date lastModified = new Date();
 
@@ -150,6 +156,7 @@ public class ClientHandler extends Thread {
 
     }
 
+    //forms reply to send back to client
     private void formAttrReply(FSReply reply, FSRequest request) {
         Date lastModified = new Date();
         File file = FileSystem.getFile(request.getFname());
